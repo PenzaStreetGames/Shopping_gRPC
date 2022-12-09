@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+service ShoppingList {
+  rpc GetShoppingList(google.protobuf.Empty) returns (stream ShoppingListItem) {}
+  rpc GetShoppingListItem(Uid) returns (ShoppingListItem) {}
+  rpc CreateShoppingListItem(NewShoppingListItem) returns (Uid) {}
+  rpc UpdateShoppingListItem(ShoppingListItem) returns (ShoppingListItem) {}
+  rpc DeleteShoppingListItem(Uid) returns (ShoppingListItem) {}
+}
+
+message NewShoppingListItem {
+  string name = 1;
+  uint32 quantity = 2;
+  bool completed = 3;
+}
+
+message ShoppingListItem {
+  string uid = 1;
+  string name = 2;
+  uint32 quantity = 3;
+  bool completed = 4;
+}
+
+message Uid {
+  string uid = 1;
+}
